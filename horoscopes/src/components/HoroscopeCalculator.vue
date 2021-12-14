@@ -26,46 +26,46 @@ const getPhotos = async () => {
       .then(response => zodiacPhotosMood.value = response.data);
 }
 
-onMounted(async () => {
+onMounted( () => {
   getHoroscopes()
 })
 
 </script>
 
 <template>
-  <div class="flex justify-center pb-5">
-    <div class="px-3" v-for="zodiac in horoscopes">
-      <button :class="zodiacSign === zodiac ? 'font-black' : 'font-normal'" @click="() => { zodiacSign = zodiac; getHoroscopes(); getPhotos() }">{{ zodiac }}</button>
+  <div class="flex justify-center pb-5 flex-wrap pt-5 md:pt-7">
+    <div class="px-5 md:px-3" v-for="zodiac in horoscopes">
+      <button class="text-sm md:text-base" :class="zodiacSign === zodiac ? 'font-black' : 'font-normal'" @click="() => { zodiacSign = zodiac; getHoroscopes(); getPhotos() }">{{ zodiac }}</button>
     </div>
   </div>
 
-  <div v-if="horoscopeData" class="px-10 lg:px-32 xl:px-80 pb-10">
-    <div class="p-10 bg-gray-200 mb-2">
+  <div v-if="horoscopeData" class="px-5 lg:px-32 xl:px-80 pb-10">
+    <div class="p-7 md:p-10 bg-gray-200 md:mb-1">
       <div class="flex justify-center">
-        <div class="border border-gray-400 px-5 py-2 mb-5">
-          <h1 class="text-6xl tracking-widest pb-2">{{ zodiacSign }}</h1>
+        <div class="border border-gray-400 px-5 py-2 mb-3 lg:mb-5">
+          <h1 class="text-5xl md:text-6xl tracking-widest pb-2">{{ zodiacSign }}</h1>
           <p class="uppercase text-xs tracking-wide">{{ horoscopeData.date_range }}</p>
         </div>
       </div>
-      <p class="italic pb-2">Your horoscope for {{ horoscopeData.current_date }}</p>
-      <p class="text-2xl font-thin">{{ horoscopeData.description }}</p>
-      <div class="flex justify-around pt-5">
+      <p class="text-xs md:text-normal italic pb-2">Your horoscope for {{ horoscopeData.current_date }}</p>
+      <p class="text-xl md:text-2xl font-thin">{{ horoscopeData.description }}</p>
+      <div class="flex justify-around flex-wrap pt-5">
         <p>Your lucky number is <strong>{{ horoscopeData.lucky_number }}</strong></p>
         <p>Your lucky time is <strong>{{ horoscopeData.lucky_time }}</strong></p>
         <p>Your your mood today is <strong>{{ horoscopeData.mood }}</strong></p>
       </div>
-      <div class="flex justify-around">
-        <p>Today you are most compatible with <strong>{{ horoscopeData.compatibility }}</strong></p>
+      <div class="flex justify-around flex-wrap">
+        <p>You are most compatible with <strong>{{ horoscopeData.compatibility }}</strong></p>
         <p>Your color of the day is <strong>{{ horoscopeData.color }}</strong></p>
       </div>
     </div>
-    <div class="flex justify-center pb-2">
-      <div v-if="zodiacPhotosColor" v-for="photo in zodiacPhotosColor.photos.slice(0,4)" class="px-1">
+    <div class="flex justify-center pb-2 flex-wrap md:flex-nowrap -mx-2 md:-mx-1">
+      <div v-if="zodiacPhotosColor" v-for="photo in zodiacPhotosColor.photos.slice(0,4)" class="p-2 md:p-1 pb-0 md:pb-0">
         <img class="" alt="photo" :src="photo.src.medium" />
       </div>
     </div>
-    <div class="flex justify-center">
-      <div v-if="zodiacPhotosMood" v-for="photo in zodiacPhotosMood.photos.slice(0,4)" class="px-1">
+    <div class="flex justify-center flex-wrap md:flex-nowrap -mx-2 md:-mx-1">
+      <div v-if="zodiacPhotosMood" v-for="photo in zodiacPhotosMood.photos.slice(0,4)" class="p-2 md:p-1 pt-0 md:pt-0">
         <img class="" alt="photo" :src="photo.src.medium" />
       </div>
     </div>
